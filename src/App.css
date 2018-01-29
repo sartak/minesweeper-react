@@ -1,0 +1,34 @@
+.minesweeper .timer-1 { width: 13px; height: 23px; background:url(sprites.png) -2px -2px; }
+.minesweeper .timer-2 { width: 13px; height: 23px; background:url(sprites.png) -16px -2px; }
+.minesweeper .timer-3 { width: 13px; height: 23px; background:url(sprites.png) -30px -2px; }
+.minesweeper .timer-4 { width: 13px; height: 23px; background:url(sprites.png) -44px -2px; }
+.minesweeper .timer-5 { width: 13px; height: 23px; background:url(sprites.png) -58px -2px;  }
+.minesweeper .timer-6 { width: 13px; height: 23px; background:url(sprites.png) -72px -2px; }
+.minesweeper .timer-7 { width: 13px; height: 23px; background:url(sprites.png) -86px -2px; }
+.minesweeper .timer-8 { width: 13px; height: 23px; background:url(sprites.png) -100px -2px; }
+.minesweeper .timer-9 { width: 13px; height: 23px; background:url(sprites.png) -114px -2px; }
+.minesweeper .timer-0 { width: 13px; height: 23px; background:url(sprites.png) -128px -2px; }
+
+.minesweeper .face-smile { width: 26px; height: 26px; background:url(sprites.png) -2px -26px; }
+.minesweeper .face-pressed { width: 26px; height: 26px; background:url(sprites.png) -29px -26px;  }
+.minesweeper .face-surprise { width: 26px; height: 26px; background:url(sprites.png) -56px -26px; }
+.minesweeper .face-cool { width: 26px; height: 26px; background:url(sprites.png) -83px -26px; }
+.minesweeper .face-frown { width: 26px; height: 26px; background:url(sprites.png) -110px -26px; }
+
+.minesweeper .tile-new { width: 16px; height: 16px; background:url(sprites.png) -2px -53px; }
+.minesweeper .tile-flag { width: 16px; height: 16px; background:url(sprites.png) -36px -53px; }
+.minesweeper .tile-question { width: 16px; height: 16px; background:url(sprites.png) -53px -53px; }
+.minesweeper .tile-question-pressed { width: 16px; height: 16px; background:url(sprites.png) -70px -53px; }
+.minesweeper .tile-mine { width: 16px; height: 16px; background:url(sprites.png) -87px -53px; }
+.minesweeper .tile-mine-red { width: 16px; height: 16px; background:url(sprites.png) -104px -53px; }
+.minesweeper .tile-mine-x { width: 16px; height: 16px; background:url(sprites.png) -121px -53px; }
+
+.minesweeper .tile-0 { width: 16px; height: 16px; background:url(sprites.png) -19px -53px; }
+.minesweeper .tile-1 { width: 16px; height: 16px; background:url(sprites.png) -2px -70px; }
+.minesweeper .tile-2 { width: 16px; height: 16px; background:url(sprites.png) -19px -70px; }
+.minesweeper .tile-3 { width: 16px; height: 16px; background:url(sprites.png) -36px -70px; }
+.minesweeper .tile-4 { width: 16px; height: 16px; background:url(sprites.png) -53px -70px; }
+.minesweeper .tile-5 { width: 16px; height: 16px; background:url(sprites.png) -70px -70px; }
+.minesweeper .tile-6 { width: 16px; height: 16px; background:url(sprites.png) -87px -70px; }
+.minesweeper .tile-7 { width: 16px; height: 16px; background:url(sprites.png) -104px -70px; }
+.minesweeper .tile-8 { width: 16px; height: 16px; background:url(sprites.png) -121px -70px; }
