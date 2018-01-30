@@ -180,7 +180,7 @@ class Digits extends Component {
 class ModeButton extends Component {
     render() {
         return (
-            <button className="face-smile"></button>
+            <button className={"face-"+this.props.phase}></button>
         );
     }
 }
@@ -190,7 +190,7 @@ class HUD extends Component {
         return (
             <div className="HUD">
                 <div className="mines-left"><Digits display={this.props.minesLeft} /></div>
-                <ModeButton />
+                <ModeButton phase={this.props.phase} />
                 <div className="time-spent"><Digits display={this.props.timeSpent} /></div>
             </div>
         );
@@ -206,7 +206,7 @@ class Minesweeper extends Component {
     render() {
         return (
             <div className="minesweeper">
-                <HUD minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
+                <HUD phase={this.state.phase} minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
                 <Board phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} />
             </div>
         );

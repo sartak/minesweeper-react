@@ -71,11 +71,17 @@
 .minesweeper .timer-9 { width: 13px; height: 23px; background:url(sprites.png) -114px -2px; }
 .minesweeper .timer-0 { width: 13px; height: 23px; background:url(sprites.png) -128px -2px; }
 
-.minesweeper .face-smile { width: 26px; height: 26px; background:url(sprites.png) -2px -26px; }
+.minesweeper .face-init,
+.minesweeper .face-play {
+    width: 26px;
+    height: 26px;
+    background:url(sprites.png) -2px -26px;
+}
+
 .minesweeper .face-pressed { width: 26px; height: 26px; background:url(sprites.png) -29px -26px;  }
 .minesweeper .face-surprise { width: 26px; height: 26px; background:url(sprites.png) -56px -26px; }
-.minesweeper .face-cool { width: 26px; height: 26px; background:url(sprites.png) -83px -26px; }
-.minesweeper .face-frown { width: 26px; height: 26px; background:url(sprites.png) -110px -26px; }
+.minesweeper .face-won { width: 26px; height: 26px; background:url(sprites.png) -83px -26px; }
+.minesweeper .face-loss { width: 26px; height: 26px; background:url(sprites.png) -110px -26px; }
 
 .minesweeper .tile-new { width: 16px; height: 16px; background:url(sprites.png) -2px -53px; }
 .minesweeper .tile-flag { width: 16px; height: 16px; background:url(sprites.png) -36px -53px; }
