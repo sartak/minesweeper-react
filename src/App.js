@@ -7,7 +7,14 @@ class Tile extends Component {
     }
 
     render() {
-        return <span onClick={this.click} className="tile tile-new" />;
+        var tile = this.props.tile;
+        var className = "tile-new";
+
+        if (tile.revealed) {
+            className = "tile-" + tile.value;
+        }
+
+        return <span onClick={this.click} className={"tile " + className} />;
     }
 }
 
