@@ -2,19 +2,33 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Tile extends Component {
-    click = () => {
-        this.props.onClick(this.props.tile);
+    click = (e) => {
+        if (e.type === 'click') {
+            this.props.onClick(this.props.tile);
+        }
+        else {
+            e.preventDefault();
+            this.props.onRightClick(this.props.tile);
+        }
     }
 
     render() {
         var tile = this.props.tile;
         var className = "tile-new";
 
-        if (tile.revealed) {
+        if (tile.flagged) {
+            if (tile.revealed && tile.value !== 'mine') {
+                className = "tile-mine-x";
+            }
+            else {
+                className = "tile-flag";
+            }
+        }
+        else if (tile.revealed) {
             className = "tile-" + tile.value;
         }
 
-        return <span onClick={this.click} className={"tile " + className} />;
+        return <span onClick={this.click} onContextMenu={this.click} className={"tile " + className} />;
     }
 }
 
@@ -30,7 +44,8 @@ class Board extends Component {
                     x: x,
                     y: y,
                     value: 0,
-                    revealed: false
+                    revealed: false,
+                    flagged: false
                 });
             }
             grid.push(col);
@@ -107,7 +122,7 @@ class Board extends Component {
             return state;
         }
 
-        if (tile.revealed) {
+        if (tile.revealed || tile.flagged) {
             return state;
         }
 
@@ -128,7 +143,7 @@ class Board extends Component {
         if (tile.value === 'mine') {
             tile.value = 'mine-red';
             this.eachTile(state, tile => {
-                if (tile.value === 'mine') {
+                if (tile.value === 'mine' || tile.flagged) {
                     tile.revealed = true;
                 }
             });
@@ -149,12 +164,38 @@ class Board extends Component {
         return { phase: this.props.phase, grid: state.grid, revealedAny: state.revealedAny };
     }
 
+    flagTile(state, tile) {
+        if (state.phase === 'won' || state.phase === 'loss') {
+            return state;
+        }
+
+        if (tile.revealed) {
+            return state;
+        }
+
+        tile.flagged = !tile.flagged;
+
+        var minesLeft = this.props.mines;
+        this.eachTile(state, tile => {
+            if (tile.flagged) {
+                minesLeft--;
+            }
+        });
+        this.props.onFlag(minesLeft);
+
+        return { grid: state.grid };
+    }
+
     enterPhase(phase) {
         this.props.changedPhase(phase);
     }
 
     clickedTile = tile => {
         this.setState(prev => (this.revealTile(prev, tile)));
+    }
+
+    rightClickedTile = tile => {
+        this.setState(prev => (this.flagTile(prev, tile)));
     }
 
     render () {
@@ -164,7 +205,7 @@ class Board extends Component {
                     this.state.grid.map(row => {
                         return (
                             <div key={row[0].x} className="row">
-                                { row.map(tile => <Tile key={tile.y} tile={tile} onClick={this.clickedTile}  /> ) }
+                                { row.map(tile => <Tile key={tile.y} tile={tile} onClick={this.clickedTile} onRightClick={this.rightClickedTile} /> ) }
                             </div>
                         );
                     })
@@ -211,24 +252,28 @@ class HUD extends Component {
 class Minesweeper extends Component {
     constructor(props) {
         super(props);
-        this.state = { phase: 'init', timeSpent: 0, gameNumber: 0 };
+        this.state = { phase: 'init', timeSpent: 0, gameNumber: 0, minesLeft: props.mines };
     }
 
     render() {
         return (
             <div className="minesweeper">
-                <HUD phase={this.state.phase} minesLeft={this.props.mines} timeSpent={this.state.timeSpent} restart={this.restart} />
-                <Board key={this.state.gameNumber} phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} />
+                <HUD phase={this.state.phase} minesLeft={this.state.minesLeft} timeSpent={this.state.timeSpent} restart={this.restart} />
+                <Board key={this.state.gameNumber} phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} onFlag={this.onFlag} />
             </div>
         );
     }
 
     restart = () => {
-        this.setState(prev => ({ phase: 'init', timeSpent: 0, gameNumber: prev.gameNumber+1 }));
+        this.setState(prev => ({ phase: 'init', timeSpent: 0, gameNumber: prev.gameNumber+1, minesLeft: this.props.mines }));
     }
 
     changedPhase = (phase) => {
         this.setState({phase: phase});
+    }
+
+    onFlag = (minesLeft) => {
+        this.setState({minesLeft: minesLeft});
     }
 
     tick() {
