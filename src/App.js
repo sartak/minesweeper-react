@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Tile extends Component {
+    click = () => {
+        this.props.onClick(this.props.tile);
+    }
+
     render() {
-        return <span className="tile tile-new" />;
+        return <span onClick={this.click} className="tile tile-new" />;
     }
 }
 
@@ -56,6 +60,9 @@ class Board extends Component {
         }
     }
 
+    clickedTile = tile => {
+    }
+
     render () {
         return (
             <div className="board">
@@ -63,7 +70,7 @@ class Board extends Component {
                     this.state.grid.map(row => {
                         return (
                             <div key={row[0].y} className="row">
-                                { row.map(tile => <Tile key={tile.x} tile={tile} /> ) }
+                                { row.map(tile => <Tile key={tile.x} tile={tile} onClick={this.clickedTile}  /> ) }
                             </div>
                         );
                     })
