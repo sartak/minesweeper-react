@@ -108,6 +108,16 @@ class Board extends Component {
             });
         }
 
+        if (tile.value === 'mine') {
+            tile.value = 'mine-red';
+            this.eachTile(state, tile => {
+                if (tile.value === 'mine') {
+                    tile.revealed = true;
+                }
+            });
+            this.props.endedPlay();
+        }
+
         return { grid: state.grid, revealedAny: state.revealedAny };
     }
 
@@ -172,13 +182,17 @@ class Minesweeper extends Component {
         return (
             <div className="minesweeper">
                 <HUD minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
-                <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} beganPlay={this.beganPlay} />
+                <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} beganPlay={this.beganPlay} endedPlay={this.endedPlay} />
             </div>
         );
     }
 
     beganPlay = () => {
         this.setState({isPlaying: true});
+    }
+
+    endedPlay = () => {
+        this.setState({isPlaying: false});
     }
 
     tick() {
