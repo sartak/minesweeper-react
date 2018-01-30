@@ -102,6 +102,12 @@ class Board extends Component {
             this.props.beganPlay();
         }
 
+        if (tile.value === 0) {
+            this.eachNeighbor(state, tile, neighbor => {
+                state = this.revealTile(state, neighbor);
+            });
+        }
+
         return { grid: state.grid, revealedAny: state.revealedAny };
     }
 
