@@ -37,10 +37,10 @@ class Board extends Component {
         super(props);
 
         var grid = [];
-        for (var x = 0; x < this.props.cols; ++x) {
-            var col = [];
-            for (var y = 0; y < this.props.rows; ++y) {
-                col.push({
+        for (var y = 0; y < this.props.rows; ++y) {
+            var row = [];
+            for (var x = 0; x < this.props.cols; ++x) {
+                row.push({
                     x: x,
                     y: y,
                     value: 0,
@@ -48,7 +48,7 @@ class Board extends Component {
                     flagged: false
                 });
             }
-            grid.push(col);
+            grid.push(row);
         }
 
         this.state = { phase: props.phase, grid: grid, revealedAny: false };
@@ -64,7 +64,7 @@ class Board extends Component {
         if (x < 0 || y < 0 || x >= this.props.cols || y >= this.props.rows) {
             return null;
         }
-        return state.grid[x][y];
+        return state.grid[y][x];
     }
 
     eachTile(state, callback) {
@@ -204,8 +204,8 @@ class Board extends Component {
                 {
                     this.state.grid.map(row => {
                         return (
-                            <div key={row[0].x} className="row">
-                                { row.map(tile => <Tile key={tile.y} tile={tile} onClick={this.clickedTile} onRightClick={this.rightClickedTile} /> ) }
+                            <div key={row[0].y} className="row">
+                                { row.map(tile => <Tile key={tile.x} tile={tile} onClick={this.clickedTile} onRightClick={this.rightClickedTile} /> ) }
                             </div>
                         );
                     })
