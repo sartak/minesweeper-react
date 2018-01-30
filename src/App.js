@@ -47,8 +47,10 @@ class Board extends Component {
 
 class Digits extends Component {
     render() {
+        var digits = "000" + (this.props.display || 0);
+        digits = digits.substr(digits.length - 3);
         return (
-            <span>{this.props.display}</span>
+            digits.split("").map(digit => <span className={"digit timer-" + digit} />)
         );
     }
 }
@@ -56,7 +58,7 @@ class Digits extends Component {
 class ModeButton extends Component {
     render() {
         return (
-            <button></button>
+            <button className="face-smile"></button>
         );
     }
 }
@@ -65,9 +67,9 @@ class HUD extends Component {
     render() {
         return (
             <div className="HUD">
-                <Digits display={this.props.minesLeft} />
+                <div className="mines-left"><Digits display={this.props.minesLeft} /></div>
                 <ModeButton />
-                <Digits display={this.props.timeSpent} />
+                <div className="time-spent"><Digits display={this.props.timeSpent} /></div>
             </div>
         );
     }
@@ -77,7 +79,7 @@ class Minesweeper extends Component {
     render() {
         return (
             <div className="minesweeper">
-                <HUD minesLeft={this.props.mines} />
+                <HUD minesLeft={this.props.mines} timeSpent={this.props.timeSpent} />
                 <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} />
             </div>
         );

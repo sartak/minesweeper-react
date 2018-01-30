@@ -1,3 +1,65 @@
+.App {
+    text-align: center;
+    margin: 8px;
+}
+
+.minesweeper {
+    background: rgb(189, 189, 189);
+    display: inline-block;
+    padding: 8px;
+}
+
+.minesweeper .board,
+.minesweeper .HUD {
+    border-top: 2px solid rgb(123, 123, 123);
+    border-left: 2px solid rgb(123, 123, 123);
+    border-bottom: 2px solid #FFF;
+    border-right: 2px solid #FFF;
+}
+
+.minesweeper .HUD {
+    height: 31px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.minesweeper .HUD .mines-left {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.minesweeper .HUD .time-spent {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+
+.minesweeper .HUD button {
+    margin-top: 2px;
+    outline: none;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 2px solid rgb(123, 123, 123);
+    border-right: 2px solid rgb(123, 123, 123);
+}
+
+
+.minesweeper .row {
+    height: 16px;
+}
+
+.minesweeper .tile {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.minesweeper .HUD .digit {
+    display: inline-block;
+    vertical-align: top;
+}
+
 .minesweeper .timer-1 { width: 13px; height: 23px; background:url(sprites.png) -2px -2px; }
 .minesweeper .timer-2 { width: 13px; height: 23px; background:url(sprites.png) -16px -2px; }
 .minesweeper .timer-3 { width: 13px; height: 23px; background:url(sprites.png) -30px -2px; }
@@ -14,14 +76,6 @@
 .minesweeper .face-surprise { width: 26px; height: 26px; background:url(sprites.png) -56px -26px; }
 .minesweeper .face-cool { width: 26px; height: 26px; background:url(sprites.png) -83px -26px; }
 .minesweeper .face-frown { width: 26px; height: 26px; background:url(sprites.png) -110px -26px; }
-
-.minesweeper .row {
-    height: 16px;
-}
-
-.minesweeper .tile {
-    display: inline-block;
-}
 
 .minesweeper .tile-new { width: 16px; height: 16px; background:url(sprites.png) -2px -53px; }
 .minesweeper .tile-flag { width: 16px; height: 16px; background:url(sprites.png) -36px -53px; }
