@@ -29,7 +29,13 @@ class Board extends Component {
             grid.push(col);
         }
 
-        this.state = { grid: grid, revealedAny: false };
+        this.state = { phase: props.phase, grid: grid, revealedAny: false };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            phase: nextProps.phase
+        });
     }
 
     tileAt(state, x, y) {
@@ -90,6 +96,10 @@ class Board extends Component {
     }
 
     revealTile(state, tile) {
+        if (state.phase === 'won' || state.phase === 'loss') {
+            return state;
+        }
+
         if (tile.revealed) {
             return state;
         }
@@ -99,7 +109,7 @@ class Board extends Component {
         if (!state.revealedAny) {
             state.revealedAny = true;
             state = this.generateBombs(state, tile);
-            this.props.beganPlay();
+            this.enterPhase('play');
         }
 
         if (tile.value === 0) {
@@ -115,10 +125,14 @@ class Board extends Component {
                     tile.revealed = true;
                 }
             });
-            this.props.endedPlay();
+            this.enterPhase('loss');
         }
 
-        return { grid: state.grid, revealedAny: state.revealedAny };
+        return { phase: this.props.phase, grid: state.grid, revealedAny: state.revealedAny };
+    }
+
+    enterPhase(phase) {
+        this.props.changedPhase(phase);
     }
 
     clickedTile = tile => {
@@ -175,29 +189,25 @@ class HUD extends Component {
 class Minesweeper extends Component {
     constructor(props) {
         super(props);
-        this.state = { isPlaying: false, timeSpent: 0 };
+        this.state = { phase: 'init', timeSpent: 0 };
     }
 
     render() {
         return (
             <div className="minesweeper">
                 <HUD minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
-                <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} beganPlay={this.beganPlay} endedPlay={this.endedPlay} />
+                <Board phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} />
             </div>
         );
     }
 
-    beganPlay = () => {
-        this.setState({isPlaying: true});
-    }
-
-    endedPlay = () => {
-        this.setState({isPlaying: false});
+    changedPhase = (phase) => {
+        this.setState({phase: phase});
     }
 
     tick() {
         this.setState(prev => (
-            prev.isPlaying ? { timeSpent: prev.timeSpent + 1 } : { }
+            prev.phase === 'play' ? { timeSpent: prev.timeSpent + 1 } : { }
         ));
     }
 
