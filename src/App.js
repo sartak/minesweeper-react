@@ -76,13 +76,35 @@ class HUD extends Component {
 }
 
 class Minesweeper extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isPlaying: false, timeSpent: 0 };
+    }
+
     render() {
         return (
             <div className="minesweeper">
-                <HUD minesLeft={this.props.mines} timeSpent={this.props.timeSpent} />
+                <HUD minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
                 <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} />
             </div>
         );
+    }
+
+    tick() {
+        this.setState(prev => (
+            prev.isPlaying ? { timeSpent: prev.timeSpent + 1 } : { }
+        ));
+    }
+
+    componentDidMount() {
+        this.timer = setInterval(
+            () => this.tick(),
+            1000,
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 }
 
