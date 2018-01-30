@@ -36,3 +36,6 @@ if (module.hot) {
   });
 }
 
+document.write("<hr style='border-top: 0.5px solid black; border-bottom: 0' /><p id='refreshNotice'>Page loaded at " + new Date().toLocaleTimeString() + '</p>');
+setTimeout(() => document.getElementById('refreshNotice').className = 'active', 16);
+setTimeout(() => document.getElementById('refreshNotice').className = '', 2000);
