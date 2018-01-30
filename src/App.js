@@ -128,6 +128,17 @@ class Board extends Component {
             this.enterPhase('loss');
         }
 
+        var unrevealed = 0;
+        this.eachTile(state, tile => {
+            if (!tile.revealed) {
+                unrevealed++;
+            }
+        });
+        if (unrevealed == this.props.mines) {
+            this.enterPhase('won');
+        }
+
+
         return { phase: this.props.phase, grid: state.grid, revealedAny: state.revealedAny };
     }
 
