@@ -178,9 +178,13 @@ class Digits extends Component {
 }
 
 class ModeButton extends Component {
+    click = () => {
+        this.props.onClick();
+    }
+
     render() {
         return (
-            <button className={"face-"+this.props.phase}></button>
+            <button onClick={this.click} className={"face-"+this.props.phase}></button>
         );
     }
 }
@@ -190,7 +194,7 @@ class HUD extends Component {
         return (
             <div className="HUD">
                 <div className="mines-left"><Digits display={this.props.minesLeft} /></div>
-                <ModeButton phase={this.props.phase} />
+                <ModeButton onClick={this.props.restart} phase={this.props.phase} />
                 <div className="time-spent"><Digits display={this.props.timeSpent} /></div>
             </div>
         );
@@ -200,16 +204,20 @@ class HUD extends Component {
 class Minesweeper extends Component {
     constructor(props) {
         super(props);
-        this.state = { phase: 'init', timeSpent: 0 };
+        this.state = { phase: 'init', timeSpent: 0, gameNumber: 0 };
     }
 
     render() {
         return (
             <div className="minesweeper">
-                <HUD phase={this.state.phase} minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
-                <Board phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} />
+                <HUD phase={this.state.phase} minesLeft={this.props.mines} timeSpent={this.state.timeSpent} restart={this.restart} />
+                <Board key={this.state.gameNumber} phase={this.state.phase} mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} changedPhase={this.changedPhase} />
             </div>
         );
+    }
+
+    restart = () => {
+        this.setState(prev => ({ phase: 'init', timeSpent: 0, gameNumber: prev.gameNumber+1 }));
     }
 
     changedPhase = (phase) => {
