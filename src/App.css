@@ -15,6 +15,14 @@
 .minesweeper .face-cool { width: 26px; height: 26px; background:url(sprites.png) -83px -26px; }
 .minesweeper .face-frown { width: 26px; height: 26px; background:url(sprites.png) -110px -26px; }
 
+.minesweeper .row {
+    height: 16px;
+}
+
+.minesweeper .tile {
+    display: inline-block;
+}
+
 .minesweeper .tile-new { width: 16px; height: 16px; background:url(sprites.png) -2px -53px; }
 .minesweeper .tile-flag { width: 16px; height: 16px; background:url(sprites.png) -36px -53px; }
 .minesweeper .tile-question { width: 16px; height: 16px; background:url(sprites.png) -53px -53px; }
