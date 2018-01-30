@@ -29,7 +29,7 @@ class Board extends Component {
             grid.push(row);
         }
 
-        this.state = { grid: grid };
+        this.state = { grid: grid, revealedAny: false };
     }
 
     tileAt(state, x, y) {
@@ -89,7 +89,23 @@ class Board extends Component {
         return state;
     }
 
+    revealTile(state, tile) {
+        if (tile.revealed) {
+            return state;
+        }
+
+        tile.revealed = true;
+
+        if (!state.revealedAny) {
+            state.revealedAny = true;
+            state = this.generateBombs(state, tile);
+        }
+
+        return { grid: state.grid, revealedAny: state.revealedAny };
+    }
+
     clickedTile = tile => {
+        this.setState(prev => (this.revealTile(prev, tile)));
     }
 
     render () {
