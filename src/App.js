@@ -60,6 +60,35 @@ class Board extends Component {
         }
     }
 
+    generateBombs(state, exceptTile) {
+        for (var i = 0; i < this.props.mines; ++i) {
+            var x = Math.floor(Math.random() * this.props.cols);
+            var y = Math.floor(Math.random() * this.props.rows);
+            var tile = this.tileAt(state, x, y);
+            if (tile.value || (x === exceptTile.x && y === exceptTile.y)) {
+                i--;
+                continue;
+            }
+
+            tile.value = 'mine';
+        }
+
+        this.eachTile(state, tile => {
+            if (!tile.value) {
+                var mines = 0;
+                this.eachNeighbor(state, tile, neighbor => {
+                    if (neighbor.value === 'mine') {
+                        mines++;
+                    }
+                });
+
+                tile.value = mines;
+            }
+        });
+
+        return state;
+    }
+
     clickedTile = tile => {
     }
 
