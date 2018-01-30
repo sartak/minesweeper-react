@@ -99,6 +99,7 @@ class Board extends Component {
         if (!state.revealedAny) {
             state.revealedAny = true;
             state = this.generateBombs(state, tile);
+            this.props.beganPlay();
         }
 
         return { grid: state.grid, revealedAny: state.revealedAny };
@@ -165,9 +166,13 @@ class Minesweeper extends Component {
         return (
             <div className="minesweeper">
                 <HUD minesLeft={this.props.mines} timeSpent={this.state.timeSpent} />
-                <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} />
+                <Board mines={this.props.mines} cols={this.props.cols} rows={this.props.rows} beganPlay={this.beganPlay} />
             </div>
         );
+    }
+
+    beganPlay = () => {
+        this.setState({isPlaying: true});
     }
 
     tick() {
