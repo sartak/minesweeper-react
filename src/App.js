@@ -28,6 +28,34 @@ class Board extends Component {
         this.state = { grid: grid };
     }
 
+    tileAt(state, x, y) {
+        if (x < 0 || y < 0 || x >= this.props.cols || y >= this.props.rows) {
+            return null;
+        }
+        return state.grid[x][y];
+    }
+
+    eachTile(state, callback) {
+        for (var x = 0; x < this.props.cols; ++x) {
+            for (var y = 0; y < this.props.rows; ++y) {
+                callback(this.tileAt(state, x, y));
+            }
+        }
+    }
+
+    eachNeighbor(state, tile, callback) {
+        for (var dx = -1; dx <= 1; dx++) {
+            for (var dy = -1; dy <= 1; dy++) {
+                if (dx || dy) {
+                    var neighbor = this.tileAt(state, dx + tile.x, dy + tile.y);
+                    if (neighbor) {
+                        callback(neighbor);
+                    }
+                }
+            }
+        }
+    }
+
     render () {
         return (
             <div className="board">
