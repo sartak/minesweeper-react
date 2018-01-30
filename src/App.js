@@ -16,17 +16,17 @@ class Board extends Component {
         super(props);
 
         var grid = [];
-        for (var y = 0; y < this.props.rows; ++y) {
-            var row = [];
-            for (var x = 0; x < this.props.cols; ++x) {
-                row.push({
+        for (var x = 0; x < this.props.cols; ++x) {
+            var col = [];
+            for (var y = 0; y < this.props.rows; ++y) {
+                col.push({
                     x: x,
                     y: y,
                     value: 0,
                     revealed: false
                 });
             }
-            grid.push(row);
+            grid.push(col);
         }
 
         this.state = { grid: grid, revealedAny: false };
