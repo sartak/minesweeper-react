@@ -156,8 +156,8 @@ class Board extends Component {
                 {
                     this.state.grid.map(row => {
                         return (
-                            <div key={row[0].y} className="row">
-                                { row.map(tile => <Tile key={tile.x} tile={tile} onClick={this.clickedTile}  /> ) }
+                            <div key={row[0].x} className="row">
+                                { row.map(tile => <Tile key={tile.y} tile={tile} onClick={this.clickedTile}  /> ) }
                             </div>
                         );
                     })
