@@ -1,0 +1,110 @@
+$tile-height: 16px;
+$margin: 4px;
+$timer-height: 23px;
+$face-height: 26px;
+
+.App {
+    text-align: center;
+}
+
+.Minesweeper {
+    margin: 1em 0;
+    background: rgb(183, 183, 183);
+    display: inline-block;
+    padding: $margin;
+    border-bottom: 2px solid rgb(100, 100, 100);
+    border-right: 2px solid rgb(100, 100, 100);
+    border-top: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+
+    .Board {
+        display: inline-block;
+        margin-top: 2*$margin;
+        .row {
+            height: $tile-height;
+        }
+    }
+
+    .Board, .HUD {
+        border-top: 2px solid rgb(100, 100, 100);
+        border-left: 2px solid rgb(100, 100, 100);
+        border-bottom: 2px solid #FFF;
+        border-right: 2px solid #FFF;
+    }
+
+    .HUD {
+        position: relative;
+        height: $face-height + 2 * $margin;
+
+        .clocky-display {
+            display: inline-block;
+            height: $timer-height;
+        }
+        .mines-left {
+            position: absolute;
+            left: $margin;
+            top: $margin;
+        }
+        .time-spent {
+            position: absolute;
+            right: $margin;
+            top: $margin;
+        }
+    }
+
+    .timer-digit {
+        display: inline-block;
+        width: 13px;
+        height: $timer-height;
+        margin-top: ($face-height - $timer-height) / 2;
+        background: url(sprites.png);
+    }
+    .timer-1 { background-position:   -2px -2px; }
+    .timer-2 { background-position:  -16px -2px; }
+    .timer-3 { background-position:  -30px -2px; }
+    .timer-4 { background-position:  -44px -2px; }
+    .timer-5 { background-position:  -58px -2px; }
+    .timer-6 { background-position:  -72px -2px; }
+    .timer-7 { background-position:  -86px -2px; }
+    .timer-8 { background-position: -100px -2px; }
+    .timer-9 { background-position: -114px -2px; }
+    .timer-0 { background-position: -128px -2px; }
+    
+    .face {
+        display: inline-block;
+        width: 26px;
+        height: $face-height;
+        margin-top: $margin;
+        background: url(sprites.png);
+    }
+    .face-init, .face-play { background-position:   -2px -26px; }
+    .face-won     { background-position:  -83px -26px; }
+    .face-loss    { background-position: -110px -26px; }
+    .face-pressed  { background-position:  -29px -26px; }
+    .face-surprise { background-position:  -56px -26px; }
+    
+    .tile {
+        display: inline-block;
+        vertical-align: top;
+        width: 16px;
+        height: $tile-height;
+        background: url(sprites.png);
+    }
+    .tile-new              { background-position:   -2px -53px; }
+    .tile-flag             { background-position:  -36px -53px; }
+    .tile-question         { background-position:  -53px -53px; }
+    .tile-question-pressed { background-position:  -70px -53px; }
+    .tile-mine             { background-position:  -87px -53px; }
+    .tile-mine-red         { background-position: -104px -53px; }
+    .tile-mine-x           { background-position: -121px -53px; }
+    .tile-0                { background-position:  -19px -53px; }
+    .tile-1                { background-position:   -2px -70px; }
+    .tile-2                { background-position:  -19px -70px; }
+    .tile-3                { background-position:  -36px -70px; }
+    .tile-4                { background-position:  -53px -70px; }
+    .tile-5                { background-position:  -70px -70px; }
+    .tile-6                { background-position:  -87px -70px; }
+    .tile-7                { background-position: -104px -70px; }
+    .tile-8                { background-position: -121px -70px; }
+}
+
