@@ -160,6 +160,31 @@ const rootStore = (state = initialState, action) => {
             };
         }
 
+        case 'TILE_DOUBLECLICK': {
+            let grid = state.grid;
+            let adjacentFlags = 0;
+            let tile = grid[action.y][action.x];
+
+            eachAdjacent(grid, action.x, action.y, (tile, x, y) => {
+                if (tile.flagged) {
+                    adjacentFlags++;
+                }
+            });
+
+            if (adjacentFlags == tile.value) {
+                eachAdjacent(grid, action.x, action.y, (tile, x, y) => {
+                    if (!tile.revealed) {
+                        grid = rootStore({...state, grid}, {...action, type: 'TILE_CLICK', x, y}).grid
+                    }
+                });
+            }
+
+            return {
+                ...state,
+                grid
+            };
+        }
+
         case 'TILE_CLICK': {
             let grid = state.grid;
 

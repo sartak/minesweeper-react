@@ -23,7 +23,7 @@ class Tile extends Component {
         }
 
         return (
-            <span onClick={this.props.onClick} onContextMenu={this.rightClick} className={"tile " + className} />
+            <span onDoubleClick={this.props.doubleClick} onClick={this.props.onClick} onContextMenu={this.rightClick} className={"tile " + className} />
         );
     }
 }
@@ -31,6 +31,10 @@ class Tile extends Component {
 class Board extends Component {
     tileClick = (x, y) => () => {
         this.props.tileClick(x, y);
+    }
+
+    tileDoubleClick = (x, y) => () => {
+        this.props.tileDoubleClick(x, y);
     }
 
     tileRightClick = (x, y) => () => {
@@ -43,7 +47,7 @@ class Board extends Component {
                 { this.props.grid.map( (row, y) => (
                     <div key={y} className="row">
                         { row.map( (tile, x) => (
-                            <Tile key={x} onClick={this.tileClick(x, y)} rightClick={this.tileRightClick(x, y)} {...tile} />
+                            <Tile key={x} onClick={this.tileClick(x, y)} rightClick={this.tileRightClick(x, y)} doubleClick={this.tileDoubleClick(x, y)} {...tile} />
                         ))}
                     </div>
                 )) }
@@ -59,6 +63,7 @@ const BoardState = connect(
     dispatch => ({
         tileClick:      (x, y) => dispatch({ type: 'TILE_CLICK', x, y, time: new Date() }),
         tileRightClick: (x, y) => dispatch({ type: 'TILE_FLAG', x, y }),
+        tileDoubleClick: (x, y) => dispatch({ type: 'TILE_DOUBLECLICK', x, y, time: new Date() }),
     })
 )(Board);
 
