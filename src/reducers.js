@@ -7,8 +7,8 @@ const initialTile = {
 }
 
 const initialState = {
-    mines: 15,
-    minesLeft: 15,
+    mines: 10,
+    minesLeft: 10,
     phase: 'init',
     timeSpent: 0,
     grid: Array(10).fill(Array(10).fill(initialTile)),
