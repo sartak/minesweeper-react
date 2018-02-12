@@ -188,6 +188,10 @@ const rootStore = (state = initialState, action) => {
         case 'TILE_CLICK': {
             let grid = state.grid;
 
+            if (grid[action.y][action.x].flagged) {
+                return state;
+            }
+
             if (state.phase === 'init') {
                 grid = generateMines(state, action, state.mines).grid;
             }
@@ -198,7 +202,7 @@ const rootStore = (state = initialState, action) => {
             let phase = 'play';
             let tile = grid[action.y][action.x];
 
-            if (tile.revealed || tile.flagged) {
+            if (tile.revealed) {
                 // nothing to do
             }
             else if (tile.value === 'mine') {
